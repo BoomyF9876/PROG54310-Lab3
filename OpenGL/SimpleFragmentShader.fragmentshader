@@ -1,0 +1,13 @@
+#version 330
+
+in vec4 retColor;
+out vec4 FragColor;
+
+uniform float RenderRedChannel;
+uniform float RenderGreenChannel;
+uniform float RenderBlueChannel;
+
+void main()
+{
+	FragColor = retColor;
+}

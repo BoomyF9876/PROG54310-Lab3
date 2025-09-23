@@ -1,0 +1,14 @@
+#version 330
+
+in vec3 vertices;
+in vec4 colors;
+uniform mat4 WVP;
+
+out vec4 retColor;
+
+void main()
+{
+	mat4 identityMatrix = mat4(1.0);
+	gl_Position = WVP * vec4(vertices, 1.0) * identityMatrix;
+	retColor = colors;
+}
