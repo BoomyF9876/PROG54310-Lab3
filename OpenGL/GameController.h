@@ -11,16 +11,24 @@
 class GameController
 {
 public:
-	GameController() = default;
+	GameController();
 	~GameController() = default;
 
 	void Initialize();
 	void RunGame();
+	void MoveResIterator();
+	void MoveCamIterator();
 
-private:
 	Shader* shader = nullptr;
 	Mesh* mesh = nullptr;
 	Camera* camera = nullptr;
+
+	std::vector<Resolution> resOptions;
+	std::vector<Resolution>::iterator resIt;
+
+	std::vector<Camera> camOptions;
+	std::vector<Camera>::iterator camIt;
+
 };
 
 #endif

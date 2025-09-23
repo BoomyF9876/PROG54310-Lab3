@@ -26,6 +26,7 @@ public:
 	}
 
 	void NewWindow();
+	void ResizeWindow(Resolution _res);
 	Resolution& GetResolution() { return resolution; }
 private:
 	WindowController() = default;

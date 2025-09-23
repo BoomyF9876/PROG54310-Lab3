@@ -78,7 +78,6 @@ void Mesh::Render(glm::mat4 _wvp)
 {
     glUseProgram(shader->GetProgramID());
 
-    world = glm::rotate(world, 0.0005f, { 0,1,0 });
     _wvp *= world;
     glUniformMatrix4fv(shader->GetAttrWVP(), 1, FALSE, &_wvp[0][0]);
 
@@ -107,4 +106,9 @@ void Mesh::Render(glm::mat4 _wvp)
     glDrawElements(GL_TRIANGLES, indexData.size(), GL_UNSIGNED_BYTE, (void*)0);
     glDisableVertexAttribArray(shader->GetAttrVertices());
     glDisableVertexAttribArray(shader->GetAttrColors());
+}
+
+void Mesh::RotateWorld(float _angle, glm::vec3 axis)
+{
+    world = glm::rotate(world, _angle, axis);
 }

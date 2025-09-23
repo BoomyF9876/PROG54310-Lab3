@@ -37,3 +37,10 @@ void WindowController::NewWindow()
 
 
 }
+
+void WindowController::ResizeWindow(Resolution _res)
+{
+	Create(_res.width, _res.height);
+	glfwSetWindowSize(window, _res.width, _res.height);
+	glViewport(0, 0, _res.width, _res.height);
+}

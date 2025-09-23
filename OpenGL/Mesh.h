@@ -14,6 +14,7 @@ public:
 
 	void Create(Shader* _shader);
 	void Render(glm::mat4 _wvp);
+	void RotateWorld(float _angle, glm::vec3 axis);
 
 private:
 	Shader* shader = nullptr;

@@ -1,17 +1,27 @@
 #include "Camera.h"
 
-Camera::Camera(Resolution _resolution, float _fov, float _near, float _far)
+Camera::Camera(
+	Resolution _resolution,
+	glm::vec3 _eye, glm::vec3 _center, glm::vec3 _up,
+	float _fov, float _near, float _far
+):
+	fov(_fov), near_plane(_near), far_plane(_far), eye(_eye), center(_center), up(_up)
 {
-	projection = glm::perspective(glm::radians(_fov),
+	projection = glm::perspective(
+		glm::radians(fov),
 		(float)_resolution.width / (float)_resolution.height,
-		_near,
-		_far);
-
-	view = glm::lookAt(
-		glm::vec3(1, 0, 0),
-		glm::vec3(0, 0, 0),
-		glm::vec3(0, 1, 0)
+		near_plane,
+		far_plane
 	);
+
+	view = glm::lookAt(eye,center,up);
+}
+
+void Camera::SetProjection(Resolution _resolution) {
+	projection = glm::perspective(glm::radians(fov),
+		(float)_resolution.width / (float)_resolution.height,
+		near_plane,
+		far_plane);
 }
 
 void Camera::LookAt(const glm::vec3& _position, const glm::vec3& _lookAt, const glm::vec3& _up)
