@@ -9,11 +9,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     {
         WindowController::GetInstance().ResizeWindow(*gameController->resIt);
         gameController->MoveResIterator();
+        std::cout << "V Pressed!" << std::endl;
     }
     if (key == GLFW_KEY_C && action == GLFW_PRESS)
     {
         gameController->camera = new Camera(*gameController->camIt);
         gameController->MoveCamIterator();
+        std::cout << "C Pressed!" << std::endl;
     }
 }
 
@@ -80,26 +82,33 @@ void GameController::RunGame()
     glfwSetKeyCallback(window, key_callback);
     glm::vec3 scale;
     do {
+        System::Windows::Forms::Application::DoEvents();
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         {
-            mesh->RotateWorld(0.01f, {0,0,1});
+            mesh->RotateWorld(0.05f, {0,0,1});
+            std::cout << "W Pressed!" << std::endl;
         }
         if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         {
-            mesh->RotateWorld(-0.01f, { 1,0,0 });
+            mesh->RotateWorld(-0.05f, { 1,0,0 });
+            std::cout << "A Pressed!" << std::endl;
         }
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         {
-            mesh->RotateWorld(-0.01f, { 0,0,1 });
+            mesh->RotateWorld(-0.05f, { 0,0,1 });
+            std::cout << "S Pressed!" << std::endl;
         }
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         {
-            mesh->RotateWorld(0.01f, { 1,0,0 });
+            mesh->RotateWorld(0.05f, { 1,0,0 });
+            std::cout << "D Pressed!" << std::endl;
         }
 
-        scale = glm::vec3(sin(glfwGetTime() * 3.14) * 1.005 + 1);
+        scale = glm::vec3(sin(glfwGetTime() * 3.1416f / 2 ) * 0.995f + 1.005f);
 
-        System::Windows::Forms::Application::DoEvents();
+        if (glfwGetTime() < 3.01) {
+            std::cout << "Scale is " << scale.x << " at " << glfwGetTime() << "s" << std::endl;
+        }
 
         glClear(GL_COLOR_BUFFER_BIT);
         mesh->Render(glm::scale(camera->GetProjection() * camera->GetView(), scale));
