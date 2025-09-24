@@ -78,8 +78,7 @@ void GameController::RunGame()
     GLFWwindow* window = WindowController::GetInstance().GetWindow();
     glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, key_callback);
-    glm::vec3 scale = { 1.0, 1.0, 1.0 };
-    int mod = 0;
+    glm::vec3 scale;
     do {
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         {
@@ -98,13 +97,7 @@ void GameController::RunGame()
             mesh->RotateWorld(0.01f, { 1,0,0 });
         }
 
-        mod = (int) floor(glfwGetTime());
-        if (mod % 4 < 2) {
-            scale = glm::vec3(2 + mod / 4 * 4 - glfwGetTime() * 0.995);
-        }
-        else {
-            scale = glm::vec3(glfwGetTime() * 0.995 - 1.98 - mod / 4 * 4);
-        }
+        scale = glm::vec3(sin(glfwGetTime() * 3.14) * 1.005 + 1);
 
         System::Windows::Forms::Application::DoEvents();
 
