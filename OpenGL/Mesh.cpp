@@ -112,8 +112,3 @@ void Mesh::RotateWorld(float _angle, glm::vec3 axis)
 {
     world = glm::rotate(world, _angle, axis);
 }
-
-void Mesh::ScaleWorld(double scale)
-{
-    world = glm::scale(world, { scale, scale, scale });
-}
