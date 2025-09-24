@@ -12,7 +12,7 @@ class GameController
 {
 public:
 	GameController();
-	~GameController() = default;
+	~GameController();
 
 	void Initialize();
 	void RunGame();

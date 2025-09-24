@@ -36,6 +36,27 @@ GameController::GameController()
     camIt = camOptions.begin();
 }
 
+GameController::~GameController()
+{
+    if (mesh != nullptr)
+    {
+        delete mesh;
+        mesh = nullptr;
+    }
+
+    if (shader != nullptr)
+    {
+        delete shader;
+        shader = nullptr;
+    }
+
+    if (camera != nullptr)
+    {
+        delete camera;
+        camera = nullptr;
+    }
+}
+
 void GameController::MoveResIterator()
 {
     if (resIt != resOptions.end() - 1) {
@@ -119,9 +140,5 @@ void GameController::RunGame()
     } while (
         glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
         glfwWindowShouldClose(window) == 0
-        );
-
-    delete mesh;
-    delete shader;
-    delete camera;
+    );
 }

@@ -15,15 +15,10 @@ public:
 	);
 	~Camera() = default;
 
-	void LookAt(const glm::vec3& _position, const glm::vec3& _lookAt, const glm::vec3& _up);
-	void SetProjection(Resolution _resolution);
-
 	glm::mat4 GetProjection() { return projection; }
 	glm::mat4 GetView() { return view; }
 
 private:
-	float fov, near_plane, far_plane;
-	glm::vec3 eye, center, up;
 	glm::mat4 projection;
 	glm::mat4 view;
 };

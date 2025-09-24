@@ -4,41 +4,17 @@ Mesh::~Mesh()
 {
 	glDeleteBuffers(1, &vertexBuffer);
     glDeleteBuffers(1, &indexBuffer);
+
+    if (shader != nullptr)
+    {
+        delete shader;
+        shader = nullptr;
+    }
 }
 
 void Mesh::Create(Shader* _shader)
 {
     shader = _shader;
-    /*vertexData = {
-        -1.0f, -1.0f, 0.0f,
-        1.0f, -1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f
-    };*/
-    /*vertexData = {
-        0.2f, 0.2f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-        0.3f, 0.9f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-        0.4f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-        0.2f, 0.2f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-        0.3f, 0.9f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-        0.1f, 0.6f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
-        0.4f, 0.5f, 0.0f, 1.0f, 0.5f, 0.5f, 1.0f,
-        0.3f, 0.9f, 0.0f, 0.5f, 1.0f, 0.5f, 1.0f,
-        0.6f, 0.8f, 0.0f, 0.5f, 0.5f, 1.0f, 1.0f,
-        0.5f, 1.2f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f,
-        0.6f, 0.8f, 0.0f, 1.0f, 0.5f, 1.0f, 1.0f,
-        0.3f, 0.9f, 0.0f, 1.0f, 1.0f, 0.5f, 1.0f
-    };*/
-    /*vertexData = {
-        20.0f, 30.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-        30.0f, 90.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-        40.0f, 50.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-        70.0f, 80.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f,
-        80.0f, 40.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
-        100.0f, 60.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
-        100.0f, 20.0f, 0.0f, 1.0f, 0.5f, 0.5f, 1.0f,
-        150.0f, 60.0f, 0.0f, 1.0f, 1.5f, 1.0f, 1.0f
-    };*/
-
     float a = 26.0f;
     float b = 42.0f;
     vertexData = {
