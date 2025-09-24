@@ -7,6 +7,7 @@
 #include <cassert>
 #include <string>
 #include <fstream>
+#include <cmath>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -17,6 +18,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtx/string_cast.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Resolution.h"

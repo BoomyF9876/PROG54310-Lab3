@@ -27,9 +27,9 @@ GameController::GameController()
     resIt = resOptions.begin();
 
     camOptions = {
-        Camera(WindowController::GetInstance().GetResolution(), {100, 100, 2}, {0, 0, 0}, {1, 1, 0}),
-        Camera(WindowController::GetInstance().GetResolution(), {100, 100, 2}, {0, 0, 0}, {0, 1, 1}),
-        Camera(WindowController::GetInstance().GetResolution(), {100, 100, 2}, {0, 0, 0}, {0, 1, 0})
+        Camera(WindowController::GetInstance().GetResolution(), {150, 150, 2}, {0, 0, 0}, {1, 1, 0}),
+        Camera(WindowController::GetInstance().GetResolution(), {150, 150, 2}, {0, 0, 0}, {0, 1, 1}),
+        Camera(WindowController::GetInstance().GetResolution(), {150, 150, 2}, {0, 0, 0}, {0, 1, 0})
     };
     camIt = camOptions.begin();
 }
@@ -64,7 +64,7 @@ void GameController::Initialize()
 
     camera = new Camera(
         WindowController::GetInstance().GetResolution(),
-        { 100, 100, 2 }, { 0, 0, 0 }, { 0, 1, 0 }
+        { 150, 150, 2 }, { 0, 0, 0 }, { 0, 1, 0 }
     );
 }
 
@@ -78,28 +78,41 @@ void GameController::RunGame()
     GLFWwindow* window = WindowController::GetInstance().GetWindow();
     glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, key_callback);
+    glm::vec3 scale = { 1.0, 1.0, 1.0 };
+    int mod = 0;
     do {
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         {
-            mesh->RotateWorld(0.01f, {1,0,0});
+            mesh->RotateWorld(0.01f, {0,0,1});
         }
         if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         {
-            mesh->RotateWorld(-0.01f, { 0,1,0 });
+            mesh->RotateWorld(-0.01f, { 1,0,0 });
         }
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         {
-            mesh->RotateWorld(-0.01f, { 1,0,0 });
+            mesh->RotateWorld(0.01f, { 0,0,-1 });
         }
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         {
-            mesh->RotateWorld(0.01f, { 0,1,0 });
+            mesh->RotateWorld(0.01f, { 1,0,0 });
         }
+
+        mod = (int) floor(glfwGetTime());
+        if (mod % 4 < 2) {
+            scale = glm::vec3(2 + (int) mod / 4 - glfwGetTime() * 0.995);
+        }
+        else {
+            scale = glm::vec3(glfwGetTime() * 0.995 - 1.98 - (int) mod / 4);
+        }
+        std::cout << mod << std::endl;
+        //std::cout << glm::to_string(scale) << std::endl;
+        //mesh->ScaleWorld(time);
 
         System::Windows::Forms::Application::DoEvents();
 
         glClear(GL_COLOR_BUFFER_BIT);
-        mesh->Render(camera->GetProjection() * camera->GetView());
+        mesh->Render(glm::scale(camera->GetProjection() * camera->GetView(), scale));
 
         glfwSwapBuffers(window);
         glfwPollEvents();
