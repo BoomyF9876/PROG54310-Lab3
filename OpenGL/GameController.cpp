@@ -8,12 +8,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_V && action == GLFW_PRESS)
     {
         WindowController::GetInstance().ResizeWindow(*gameController->resIt);
+        gameController->camera->SetProjection(*gameController->resIt);
         gameController->MoveResIterator();
         std::cout << "V Pressed!" << std::endl;
     }
     if (key == GLFW_KEY_C && action == GLFW_PRESS)
     {
         gameController->camera = new Camera(*gameController->camIt);
+        gameController->camera->SetProjection(WindowController::GetInstance().GetResolution());
         gameController->MoveCamIterator();
         std::cout << "C Pressed!" << std::endl;
     }
@@ -29,9 +31,9 @@ GameController::GameController()
     resIt = resOptions.begin();
 
     camOptions = {
-        Camera(WindowController::GetInstance().GetResolution(), {200, 200, 2}, {0, 0, 0}, {1, 1, 0}),
-        Camera(WindowController::GetInstance().GetResolution(), {200, 200, 2}, {0, 0, 0}, {0, 1, 1}),
-        Camera(WindowController::GetInstance().GetResolution(), {200, 200, 2}, {0, 0, 0}, {0, 1, 0})
+        Camera({1280, 768}, {200, 200, 2}, {0, 0, 0}, {1, 1, 0}),
+        Camera({1280, 768}, {200, 200, 2}, {0, 0, 0}, {0, 1, 1}),
+        Camera({1280, 768}, {200, 200, 2}, {0, 0, 0}, {0, 1, 0})
     };
     camIt = camOptions.begin();
 }
