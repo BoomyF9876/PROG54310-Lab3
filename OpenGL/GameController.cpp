@@ -106,22 +106,22 @@ void GameController::RunGame()
         System::Windows::Forms::Application::DoEvents();
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         {
-            mesh->RotateWorld(0.05f, {0,0,1});
+            mesh->RotateWorld(0.05f, {1,0,0});
             std::cout << "W Pressed!" << std::endl;
         }
         if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         {
-            mesh->RotateWorld(-0.05f, { 1,0,0 });
+            mesh->RotateWorld(-0.05f, { 0,1,0 });
             std::cout << "A Pressed!" << std::endl;
         }
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         {
-            mesh->RotateWorld(-0.05f, { 0,0,1 });
+            mesh->RotateWorld(-0.05f, { 1,0,0 });
             std::cout << "S Pressed!" << std::endl;
         }
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         {
-            mesh->RotateWorld(0.05f, { 1,0,0 });
+            mesh->RotateWorld(0.05f, { 0,1,0 });
             std::cout << "D Pressed!" << std::endl;
         }
 
